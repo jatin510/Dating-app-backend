@@ -1,0 +1,42 @@
+
+
+GET http://localhost:3000/users
+
+//GET http://localhost:3000/users?page=5
+
+###
+
+
+POST http://localhost:3000/users
+Content-Type: application/json
+
+
+{
+    "first_name": "User 12",
+    "last_name": "testuser",
+    "email": "testuser12@gmail.com"
+}
+
+
+
+###
+
+
+GET http://localhost:3000/users/63a6f536deed6d97af50e923
+
+###
+
+
+PATCH http://localhost:3000/users/63a6f536deed6d97af50e923
+Content-Type: application/json
+
+
+{
+    "first_name": "Test Test",
+    "last_name": "User 123",
+    "email": "testuser1@gmail.com"
+}
+
+###
+
+DELETE  http://localhost:3000/users/63a6f536deed6d97af50e923

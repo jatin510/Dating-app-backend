@@ -5,6 +5,7 @@ import * as Sentry from '@sentry/node';
 import * as Tracing from '@sentry/tracing';
 
 import { config } from './config';
+import { userRoutes } from './routes';
 
 const port = config.PORT;
 
@@ -22,6 +23,8 @@ Sentry.init({
 
 app.use(Sentry.Handlers.requestHandler());
 app.use(Sentry.Handlers.tracingHandler());
+
+app.use('/users', userRoutes);
 
 app.get('/health', (_req, res) =>
   res.json({ ok: true, message: 'health check working fine' })
