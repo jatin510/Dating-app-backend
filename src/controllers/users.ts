@@ -9,4 +9,10 @@ const createUser = (req, res) => {
   res.send('create user controller is called');
 };
 
-export { getUser, createUser };
+const getUserById = (req, res) => {};
+
+const deleteUser = (req, res) => {};
+
+const updateUser = (req, res) => {};
+
+export { getUser, createUser, getUserById, deleteUser, updateUser };
