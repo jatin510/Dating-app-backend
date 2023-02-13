@@ -1,4 +1,4 @@
-import User, { IUser } from '../models/user';
+import User, { IUser, IUserPreference } from '../models/user';
 
 const getUser = () => {
   console.log('get users');
@@ -16,6 +16,11 @@ const createUser = async (user: IUser): Promise<IUser> => {
   }
 };
 
+const getUserPreference = async (userId: string): Promise<IUserPreference> => {
+  const { preference } = await User.findOne({ _id: userId });
+  return preference;
+};
+
 const updateById = async (userId: string, userPayload: Partial<IUser>): Promise<IUser> => {
   try {
     const options = { new: true };
@@ -25,4 +30,9 @@ const updateById = async (userId: string, userPayload: Partial<IUser>): Promise<
   }
 };
 
-export { createUser, getUser, getById, updateById };
+const updateUserPreference = async (userId: string, userPreference: any): Promise<IUserPreference> => {
+  const { preference } = await User.findOneAndUpdate({ _id: userId }, { preference: userPreference }, { new: true });
+  return preference;
+};
+
+export { createUser, getById, getUser, getUserPreference, updateById, updateUserPreference };

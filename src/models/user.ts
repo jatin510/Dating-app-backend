@@ -5,6 +5,11 @@ export interface IUser {
   age: string;
   phone: string;
   oktaUserId: string;
+  preference?: IUserPreference;
+}
+
+export interface IUserPreference {
+  [key: string]: boolean | number | string;
 }
 
 const userSchema = new Schema<IUser>({
@@ -12,6 +17,7 @@ const userSchema = new Schema<IUser>({
   age: { type: String, required: true },
   phone: { type: String, required: true },
   oktaUserId: { type: String, unique: true, required: true },
+  preference: { type: Object },
 });
 
 const User = model<IUser>('User', userSchema);

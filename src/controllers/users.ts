@@ -1,6 +1,6 @@
 import okta, { User as OktaUser } from '@okta/okta-sdk-nodejs';
 
-import { IUser } from '../models/user';
+import { IUser, IUserPreference } from '../models/user';
 import { userService } from '../services';
 
 const oktaUrl = process.env.OKTA_URL;
@@ -31,6 +31,13 @@ const getUserById = async (req, res): Promise<IUser> => {
   return userDetails;
 };
 
+const getUserPreference = async (req, res) => {
+  const { userId } = req.params;
+
+  const { preference } = await userService.getUserPreference(userId);
+  return preference;
+};
+
 const oktaSignUp = async (req, res) => {
   try {
     const client: okta.Client = new okta.Client({
@@ -47,6 +54,8 @@ const oktaSignUp = async (req, res) => {
       phone: profile.primaryPhone,
       name: `${profile.firstName} ${profile.lastName}`,
       age: `${profile?.age}`,
+      // TODO need to check it
+      preference: profile.preferences as any,
     };
     const userDetails = await userService.createUser(createUserPayload);
     res.status(201).json({
@@ -71,4 +80,21 @@ const updateUser = async (req, res) => {
   }
 };
 
-export { createUser, deleteUser, getUser, getUserById, oktaSignUp, updateUser };
+const updateUserPreference = async (req, res) => {
+  const { userId } = req.params;
+  const { userPreferences } = req.body;
+
+  const { preference } = await userService.updateUserPreference(userId, userPreferences);
+  return preference;
+};
+
+export {
+  createUser,
+  deleteUser,
+  getUser,
+  getUserPreference,
+  getUserById,
+  oktaSignUp,
+  updateUser,
+  updateUserPreference,
+};
