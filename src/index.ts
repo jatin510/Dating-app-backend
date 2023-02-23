@@ -11,7 +11,7 @@ import { dbConnection } from './config';
 const port = config.PORT;
 
 // Connect to MongoDB
-await dbConnection();
+dbConnection();
 
 const app = express();
 app.use(cors());
