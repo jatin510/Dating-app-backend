@@ -1,6 +1,6 @@
 import okta, { User as OktaUser } from '@okta/okta-sdk-nodejs';
 
-import { IUser, IUserPreference } from '../models/user';
+import { IUser } from '../models/user';
 import { userService } from '../services';
 
 const oktaUrl = process.env.OKTA_URL;
@@ -19,7 +19,7 @@ const getUser = (req, res) => {
   res.json('get user controller is called');
 };
 
-const getUserById = async (req, res): Promise<IUser> => {
+const getUserById = async (req, res) => {
   const { userId } = req.params;
 
   // fetch user by id
@@ -28,13 +28,14 @@ const getUserById = async (req, res): Promise<IUser> => {
   res.status(200).json({
     body: userDetails,
   });
-  return userDetails;
+  // return userDetails;
 };
 
 const getUserPreference = async (req, res) => {
   const { userId } = req.params;
 
-  const { preference } = await userService.getUserPreference(userId);
+  const userDetails = await userService.getUserPreference(userId);
+  const preference = userDetails.preference;
   return preference;
 };
 

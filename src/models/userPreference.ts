@@ -19,6 +19,4 @@ const userPreference = new Schema<IUserPreference>({
   smoking: { type: Boolean },
 });
 
-const UserPreference = model<IUserPreference>('UserPreference', userPreference);
-
-export default UserPreference;
+export const UserPreference = model<IUserPreference>('UserPreference', userPreference);

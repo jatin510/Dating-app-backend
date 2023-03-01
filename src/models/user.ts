@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+import { Schema } from 'mongoose';
 import { IUserPreference } from './userPreference';
 
 export interface ILocation {
@@ -35,6 +35,4 @@ const userSchema = new Schema<IUser>({
   preference: { type: Schema.Types.ObjectId, ref: 'UserPreference' },
 });
 
-const User = model<IUser>('User', userSchema);
-
-export default User;
+export const User = model<IUser>('User', userSchema);

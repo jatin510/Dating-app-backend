@@ -1,1 +1,3 @@
-export { default as UserSchema } from './user';
+export * from './user';
+export * from './userPreference';
+export * from './swipe';
